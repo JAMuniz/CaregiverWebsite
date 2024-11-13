@@ -52,3 +52,8 @@ CREATE TABLE Transactions (
     description VARCHAR(255),
     FOREIGN KEY (account_id) REFERENCES CaregiverAccount(account_id)
 );
+
+-- Add foreign key to reference Member
+ALTER TABLE Ratings
+ADD COLUMN member_id INT,
+ADD FOREIGN KEY (member_id) REFERENCES Members(member_id);
