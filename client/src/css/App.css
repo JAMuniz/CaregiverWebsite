@@ -28,6 +28,30 @@
   color: #61dafb;
 }
 
+/* Navbar Styles */
+.App-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #282c34;
+  padding: 10px 20px;
+  color: white;
+  font-size: 18px;
+}
+
+.App-navbar h2 {
+  margin: 0;
+}
+
+.App-nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.App-link:hover {
+  text-decoration: underline;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
