@@ -1,0 +1,52 @@
+.Sign {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .Sign h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #282c34;
+  }
+  
+  .Sign-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+  }
+  
+  .form-group label {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #282c34;
+  }
+  
+  .form-group input {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .Sign-button {
+    background-color: #61dafb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .Sign-button:hover {
+    background-color: #21a1f1;
+  }
+  
