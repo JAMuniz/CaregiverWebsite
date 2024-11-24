@@ -57,3 +57,7 @@ CREATE TABLE Transactions (
 ALTER TABLE Ratings
 ADD COLUMN member_id INT,
 ADD FOREIGN KEY (member_id) REFERENCES Members(member_id);
+
+-- Add email field to Member login/info
+ALTER TABLE Members
+ADD email VARCHAR(255) NOT NULL;
