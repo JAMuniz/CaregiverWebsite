@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const { exec } = require("child_process");
 
 dotenv.config();
 
@@ -26,6 +27,22 @@ db.connect((err) => {
   } else {
     console.log("Connected to MySQL Database");
   }
+});
+
+app.all("*.php", (req, res) => {
+  const phpPath = `${__dirname}${req.path}`;
+  const phpCommand = `php ${phpPath}`;
+
+  exec(phpCommand, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error executing PHP command: ${phpCommand}`);
+      console.error(`STDERR: ${stderr}`);
+      console.error(`Error: ${error.message}`);
+      res.status(500).send(`PHP Execution Error: ${stderr || error.message}`);
+    } else {
+      res.send(stdout);
+    }
+  });
 });
 
 // Routes
