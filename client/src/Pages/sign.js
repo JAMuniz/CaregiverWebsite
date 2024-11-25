@@ -141,7 +141,7 @@ function Sign() {
                 <div className="form-group">
                     <label htmlFor="password">Password:</label>
                     <input
-                        type="text"
+                        type="password"
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
