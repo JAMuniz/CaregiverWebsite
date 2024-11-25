@@ -27,7 +27,6 @@ function Sign() {
             max_service_hours_per_week: maxHours,
         };
         try {
-            console.log("Sending formData:", formData);
             const response = await fetch("http://localhost:5000/API/register.php", {
                 method: "POST",
                 headers: {
