@@ -29,7 +29,7 @@ function Login() {
     
             if (result.success) {
                 localStorage.setItem('name', result.name);
-                navigate('/');
+                navigate('/welcome');
             } else {
                 alert(`Error: ${result.message}`);
             }
