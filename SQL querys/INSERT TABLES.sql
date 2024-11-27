@@ -24,3 +24,6 @@ INSERT INTO Transactions (account_id, amount, transaction_date, description)
 VALUES 
 (1, 300.00, '2024-11-02 10:00:00', 'Received payment for caregiving services'),
 (2, -150.00, '2024-12-02 14:00:00', 'Paid caregiver for services');
+
+UPDATE Members SET email = "alicejohnson@gmail.com" WHERE member_id = 1;
+UPDATE Members SET email = "bobsmith@gmail.com" WHERE member_id = 2;
