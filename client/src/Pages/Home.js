@@ -14,7 +14,7 @@ function Home() {
                     Connecting families with trusted caregivers for their loved ones.
                 </p>
                 <p>
-                    <Link to="/signin" className="Home-link">Sign up</Link>
+                    <Link to="/signin" className="Home-link">Sign Up</Link>
                     {' '}or {' '}
                     <Link to="/login" className="Home-link">Log In</Link> 
                     {' '} to find a caregiver, manage your profile, or track your service contracts.
