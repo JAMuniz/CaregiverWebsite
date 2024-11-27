@@ -9,7 +9,7 @@ function Navbar() {
         Caregiver Website
       </Link>
       <div className="Navbar-links">
-        <Link to="/signin" className="Navbar-button">Sign In</Link>
+        <Link to="/signin" className="Navbar-button">Sign Up</Link>
         <Link to="/login" className="Navbar-button">Log In</Link>
       </div>
     </nav>

@@ -70,7 +70,7 @@ function Sign() {
         <div>
             <Navbar />
             <div className="Sign">
-            <h1>Sign In</h1>
+            <h1>Register an Account</h1>
             <form className="Sign-form" onSubmit={handleSignIn}>
                 <div className="form-group">
                     <label htmlFor="name">Name:</label>
@@ -149,7 +149,7 @@ function Sign() {
                         required
                     />
                 </div>
-                <button type="submit" className="Sign-button">Sign In</button>
+                <button type="submit" className="Sign-button">Register</button>
             </form>
             </div>
         </div>
