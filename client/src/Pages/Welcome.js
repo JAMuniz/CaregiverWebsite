@@ -5,15 +5,8 @@ import Navbar from '../Components/Navbar';
 function Welcome() {
 
   const [route, setRoute] = useState('');
-
-  let message;
-  if (route === "search") {
-    message = <p>search</p>
-  } else if (route === "account") {
-    message = <p>account</p>
-  } else {
-    message = <p>This is your personalized dashboard. Use the menu on the left to navigate.</p>;
-  };
+  //const [message, setMessage] = useState('');
+  
   
   return (
     <div>
@@ -28,7 +21,29 @@ function Welcome() {
         </aside>
 
         <main className="Main-content">
-            {message}
+            {
+              (() => {
+                if (route === "search") {
+                  return(
+                    <>
+                    <p>search</p>
+                    </>
+                  );
+                } else if (route === "account") {
+                  return(
+                    <>
+                    <p>account</p>
+                    </>
+                  );
+                } else {
+                  return(
+                    <>
+                    <p>This is your personalized dashboard. Use the menu on the left to navigate.</p>
+                    </>
+                  );
+                };
+              })()
+            }
         </main>
         </div>
     </div>
