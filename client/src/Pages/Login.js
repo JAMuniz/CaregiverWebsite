@@ -17,7 +17,6 @@ function Login() {
             password: password,            
         };
         try {
-            console.log("Sending formData:", formData);
             const response = await fetch("http://localhost:5000/API/login.php", {
                 method: "POST",
                 headers: {
@@ -29,6 +28,7 @@ function Login() {
             const result = await response.json();
     
             if (result.success) {
+                localStorage.setItem('name', result.name);
                 navigate('/');
             } else {
                 alert(`Error: ${result.message}`);

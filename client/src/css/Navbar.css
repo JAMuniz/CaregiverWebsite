@@ -37,3 +37,11 @@
     background-color: #21a1f1;
   }
   
+  .Navbar-welcome {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+  }
