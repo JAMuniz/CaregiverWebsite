@@ -50,5 +50,7 @@
         echo json_encode(["success" => false, "message" => "Invalid input. Missing fields"]);
     }
 
+    
+
     $conn->close();
 ?>

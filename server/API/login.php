@@ -26,16 +26,29 @@
         $email = $data['email'];
         $password = $data['password'];
 
-        $stmt = $conn->prepare("SELECT password, name FROM Members WHERE email = ?");
+        $stmt = $conn->prepare("SELECT password, name, member_id FROM Members WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($hashed_password, $name);
+            $stmt->bind_result($hashed_password, $name, $memberID);
             $stmt->fetch();
 
             if (password_verify($password, $hashed_password)) {
+                $stmt2 = $conn->prepare("SELECT account_id FROM CaregiverAccount WHERE member_id = ?");
+                $stmt2->bind_param("i", $memberID);
+                $stmt2->execute();
+                $stmt2->store_result();
+
+                if ($stmt2->num_rows == 0) {  //if no account exists, create one
+                    $balance = 2000.00;
+                    $default_review = 0.00;
+                    $stmt3 = $conn->prepare("INSERT INTO CaregiverAccount (member_id, balance, review_score) VALUES (?, ?, ?)");
+                    $stmt3->bind_param("idd", $memberID, $balance, $default_review);
+                    $stmt3->execute();
+                }
+                
                 echo json_encode(["success" => true, "message" => "Login successful.", "name" => $name]);
             } else {
                 echo json_encode(["success" => false, "message" => "Invalid password."]);
