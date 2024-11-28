@@ -4,6 +4,7 @@ import Home from './Home';
 import Sign from './sign.js';
 import Login from './Login.js';
 import Welcome from './Welcome.js';
+import UpdateInfo from './updateInfo.js';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/signin" element={<Sign />} />
           <Route path="/login" element={<Login />} />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/updateinfo" element={<UpdateInfo />} />
         </Routes>
       </div>
     </Router>

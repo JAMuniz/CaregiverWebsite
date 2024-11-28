@@ -3,7 +3,7 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 
-    header("Access-Control-Allow-Origin: *"); 
+    header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: POST, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type");
 
@@ -27,7 +27,7 @@
         $stmt->execute();
         $stmt->store_result();
 
-        $stmt2 = $conn->prepare("SELECT address, phone_number, max_service_hours_per_week, parent_info, email FROM Members WHERE member_id = ?");
+        $stmt2 = $conn->prepare("SELECT * FROM Members WHERE member_id = ?");
         $stmt2->bind_param("i", $member_id);
         $stmt2->execute();
         $stmt2->store_result();
@@ -35,12 +35,14 @@
         if ($stmt->num_rows > 0 && $stmt2->num_rows > 0) {
             $stmt->bind_result($balance, $review_score);
             $stmt->fetch();
-            $stmt2->bind_result($address, $phoneNum, $maxHours, $parentInfo, $email);
+            $stmt2->bind_result($mid, $name, $pass, $address, $phoneNum, $maxHours, $balance2, $parentInfo, $email);
             $stmt2->fetch();
 
             echo json_encode(["success" => true, "message" => "Account info found.",
                 "balance" => $balance,
                 "review_score" => $review_score,
+                "mid" => $mid,
+                "username" => $name,
                 "address" => $address,
                 "phone_number" => $phoneNum,
                 "max_service_hours_per_week" => $maxHours,
@@ -48,13 +50,11 @@
                 "email" => $email
             ]);
         } else {
-            //echo json_encode(["success" => false, "message" => "Could not retrieve account info."]);
-            if ($stmt->num_rows == 0) {
-                echo json_encode(["success" => false, "message" => "Statement 1 issue"]);
-            } else if ($stmt2->num_rows == 0) {
-                echo json_encode(["success" => false, "message" => "Statement 2 issue"]);
-            }
+            echo json_encode(["success" => false, "message" => "Could not retrieve account info."]);
         }
+
+        $stmt->close();
+        $stmt2->close();
     }
 
     $conn->close();
