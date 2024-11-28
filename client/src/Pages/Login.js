@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/login.css';
 import Navbar from '../Components/Navbar';
+import UserContext from '../Components/UserContext';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { updateName } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -28,7 +30,8 @@ function Login() {
             const result = await response.json();
     
             if (result.success) {
-                localStorage.setItem('name', result.name);
+                updateName(result.name);
+
                 localStorage.setItem('mem_id', result.mem_id);
                 navigate('/welcome');
             } else {

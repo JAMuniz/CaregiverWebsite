@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import '../css/welcome.css';
 import Navbar from '../Components/Navbar';
+import UserContext from '../Components/UserContext';
 
 function Welcome() {
     const [isEditing, setIsEditing] = useState(false);
     const [route, setRoute] = useState('');
-    const [name, setName] = useState(localStorage.getItem('name') || '');
+    const { name, updateName } = useContext(UserContext);
     const [balance, setBalance] = useState('');
     const [rating, setRating] = useState('');
     const [address, setAddress] = useState('');
@@ -62,13 +63,13 @@ function Welcome() {
             setPinfo(result.parent_info);
             setEmail(result.email);
             //   localStorage.setItem('name', result.name);
-            setName(result.name);
+            updateName(result.name);
       } else {
           alert(`Error: ${result.message}`);
       };
     } catch (error) {
         console.error("Error:", error);
-        alert("An error occurred. Please try again.");
+        alert("An error occurred. Please try again!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.");
     }
   }
   
@@ -136,7 +137,7 @@ function Welcome() {
                             <h1>Edit Account Info</h1>
                             <label>
                                 Name:
-                                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                                <input type="text" value={name} onChange={(e) => updateName(e.target.value)} />
                             </label>
                             <label>
                                 Address:

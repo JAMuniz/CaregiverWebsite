@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../css/Navbar.css';
+import UserContext from './UserContext';
 
 function Navbar() {
   const navigate = useNavigate();
-  const userName = localStorage.getItem('name');
+  const { name, updateName } = useContext(UserContext);
 
   const handleLogout = () => {
     localStorage.removeItem('name');
     localStorage.removeItem('mem_id');
+    updateName();
     navigate('/');
   };
 
   return (
     <nav className="Navbar">
       <Link to="/" className="Navbar-brand">Caregiver Website</Link>
-      {userName && (
+      {name && (
         <div className="Navbar-welcome">
-          Welcome, {userName}!
+          Welcome, {name}!
         </div>
       )}
       <div className="Navbar-links">
-        {userName ? (
+        {name ? (
           <button className="Navbar-button" onClick={handleLogout}>Log Out</button>
         ) : (
           <>
