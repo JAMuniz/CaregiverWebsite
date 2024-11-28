@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/welcome.css';
 import Navbar from '../Components/Navbar';
 
@@ -14,6 +15,7 @@ function Welcome() {
   const [parentInfo, setPinfo] = useState('');
   const [email, setEmail] = useState('');
 
+  const navigate = useNavigate();
 
   const userName = localStorage.getItem('name');
   const memberID = localStorage.getItem('mem_id');
@@ -70,8 +72,9 @@ function Welcome() {
         <aside className="Sidebar">
             <h2>Menu</h2>
             <ul>
-                <li><a href="#search" onClick = {() => setRoute("search")}>Search Service</a></li>
+                <li><a href="#search" onClick = {() => setRoute("search")}>Search for Service</a></li>
                 <li><a href="#account" onClick = {() => setRoute("account")}>Account</a></li>
+                <li><a href="#account" onClick = {() => setRoute("contracts")}>My Contracts</a></li>
             </ul>
         </aside>
 
@@ -100,6 +103,15 @@ function Welcome() {
                     <p><strong>Email: </strong>{email}</p>
                     <p><strong>Address: </strong>{address}</p>
                     <p><strong>Phone Number: </strong>{formatPhoneNumber(phone_number)}</p>
+                    <br></br>
+                    <button className="Navbar-button" onClick={() => navigate("/updateinfo")}>Update Info</button>
+                    </>
+                  );
+                } if (route === "contracts") {  //contracts route
+                  fetchAccount();
+                  return(
+                    <>
+                    <p>contracts</p>
                     </>
                   );
                 } else {  //default route (only appears when you open the dashboard at first)
