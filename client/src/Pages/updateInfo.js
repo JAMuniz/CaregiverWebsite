@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/sign.css';
 import Navbar from '../Components/Navbar';
 
-let debounce = false;
+//let debounce = false;
 
 function UpdateInfo() {
     const [name, setName] = useState('');
@@ -20,8 +20,8 @@ function UpdateInfo() {
     const [OmaxHours, setOmaxHours] = useState('');
     const [Oaddress, setOAdd] = useState('');
     const [Oemail, setOEmail] = useState('');
+    const [Opass, setOPass] = useState('');
 
-    //const userName = localStorage.getItem('name');
     const memberID = localStorage.getItem('mem_id');
 
     const navigate = useNavigate();
@@ -39,6 +39,7 @@ function UpdateInfo() {
             max_service_hours_per_week: maxHours,
 
             orig_name: Oname,
+            orig_pass: Opass,
             orig_address: Oaddress,
             orig_phone_number: Ophone,
             orig_parent_info: OpInfo,
@@ -61,7 +62,7 @@ function UpdateInfo() {
             if (result.success) {
                 localStorage.setItem('name', result.name);
                 alert("Update successful!");
-                navigate('/welcome#account');
+                navigate('/welcome');
             } else {
                 alert(`Error: ${result.message}`);
             }
@@ -87,19 +88,13 @@ function UpdateInfo() {
           const result = await response.json();
       
           if (result.success) {
-              setName(result.username);
-              setAdd(result.address);
-              setPhone(result.phone_number);
-              setmaxHours(result.max_service_hours_per_week);
-              setPinfo(result.parent_info);
-              setEmail(result.email);
               setOName(result.username);
               setOAdd(result.address);
               setOPhone(result.phone_number);
               setOmaxHours(result.max_service_hours_per_week);
               setOPinfo(result.parent_info);
               setOEmail(result.email);
-              
+              setOPass(result.password);
           } else {
               alert(`Error: ${result.message}`);
           };
@@ -108,10 +103,7 @@ function UpdateInfo() {
             alert("An error occurred. Please try again.");
         }
     }
-    if (!debounce) {
-        debounce = true;
-        fetchAccount();
-    }
+    fetchAccount();
 
     const formatPhoneNumber = (value) => {
         const numericValue = value.replace(/\D/g, '');
@@ -144,7 +136,7 @@ function UpdateInfo() {
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Change First and Last Name"
+                        placeholder={Oname}
                     />
                 </div>
                 <div className="form-group">
@@ -154,7 +146,7 @@ function UpdateInfo() {
                         id="phone"
                         value={phone}
                         onChange={handlePhoneChange}
-                        placeholder="Change phone (only numbers)"
+                        placeholder={Ophone}
                     />
                 </div>
                 <div className="form-group">
@@ -164,7 +156,7 @@ function UpdateInfo() {
                         id="parentText"
                         value={pInfo}
                         onChange={(e) => setPinfo(e.target.value)}
-                        placeholder="Change Parent Information"
+                        placeholder={OpInfo}
                     />
                 </div>
                 <div className="form-group">
@@ -174,7 +166,7 @@ function UpdateInfo() {
                         id="maxHours"
                         value={maxHours}
                         onChange={(e) => setmaxHours(e.target.value)}
-                        placeholder="Change max hours per week"
+                        placeholder={OmaxHours}
                     />
                 </div>
                 <div className="form-group">
@@ -184,7 +176,7 @@ function UpdateInfo() {
                         id="address"
                         value={address}
                         onChange={(e) => setAdd(e.target.value)}
-                        placeholder="Change email"
+                        placeholder={Oaddress}
                     />
                 </div>
                 <div className="form-group">
@@ -194,7 +186,7 @@ function UpdateInfo() {
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Change email"
+                        placeholder={Oemail}
                     />
                 </div>
                 <div className="form-group">
@@ -204,7 +196,7 @@ function UpdateInfo() {
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Change password"
+                        placeholder=""
                     />
                 </div>
                 <br></br>

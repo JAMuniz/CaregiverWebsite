@@ -55,6 +55,7 @@ function Welcome() {
           setmaxHours(result.max_service_hours_per_week);
           setPinfo(result.parent_info);
           setEmail(result.email);
+          localStorage.setItem('name', result.username);
       } else {
           alert(`Error: ${result.message}`);
       };

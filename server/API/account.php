@@ -47,7 +47,8 @@
                 "phone_number" => $phoneNum,
                 "max_service_hours_per_week" => $maxHours,
                 "parent_info" => $parentInfo,
-                "email" => $email
+                "email" => $email,
+                "password" => $pass
             ]);
         } else {
             echo json_encode(["success" => false, "message" => "Could not retrieve account info."]);
