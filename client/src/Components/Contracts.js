@@ -46,7 +46,7 @@ function Contracts({ memberID }) {
               <p><strong>Start Date:</strong> {contract.start_date}</p>
               <p><strong>End Date:</strong> {contract.end_date}</p>
               <p><strong>Daily Hours:</strong> {contract.daily_hours}</p>
-              <p><strong>Rate per Hour:</strong> ${contract.rate_per_hour}</p>
+              <p><strong>Rate per Hour:</strong> {contract.rate_per_hour}</p>
             </div>
           ))
         ) : (
@@ -63,7 +63,7 @@ function Contracts({ memberID }) {
               <p><strong>Start Date:</strong> {contract.start_date}</p>
               <p><strong>End Date:</strong> {contract.end_date}</p>
               <p><strong>Daily Hours:</strong> {contract.daily_hours}</p>
-              <p><strong>Rate per Hour:</strong> ${contract.rate_per_hour}</p>
+              <p><strong>Rate per Hour:</strong> {contract.rate_per_hour}</p>
             </div>
           ))
         ) : (
