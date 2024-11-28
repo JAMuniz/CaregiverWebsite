@@ -1,0 +1,67 @@
+.contracts-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+  }
+  
+  .contracts-container h1 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+  }
+  
+  .contract-card {
+    background-color: #fff;
+    margin: 15px 5px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease-in-out;
+    width: calc(25% - 20px);
+    display: inline-table;
+  }
+  
+  .contract-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .contract-card p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #555;
+  }
+  
+  .contract-card p strong {
+    color: #333;
+  }
+  
+  .empty-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    margin-top: 20px;
+  }
+  
+  .hiring-contracts, .caregiver-contracts {
+    margin-bottom: 30px;
+  }
+  
+  @media (max-width: 768px) {
+    .contracts-container {
+      padding: 10px;
+    }
+  
+    .contract-card {
+      padding: 10px;
+    }
+  
+    .contracts-container h1 {
+      font-size: 1.5em;
+    }
+  }
+  

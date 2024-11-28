@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../css/welcome.css';
 import Navbar from '../Components/Navbar';
 import Account from '../Components/Account';
+import Contracts from '../Components/Contracts';
 
 function Welcome() {
     const [route, setRoute] = useState('');
@@ -32,12 +33,7 @@ function Welcome() {
                     } else if (route === "account") {  //account route
                         return <Account memberID={memberID} />;
                     } if (route === "contracts") {  //contracts route
-                        return(
-                            <>
-                                <h1>Hiring Contracts</h1>
-                                <h1>Caregiver Contracts</h1>
-                            </>
-                        );
+                        return <Contracts memberID={memberID} />;
                     } else {  //default route (only appears when you open the dashboard at first)
                     return(
                         <>
