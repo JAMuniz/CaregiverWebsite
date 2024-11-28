@@ -90,7 +90,7 @@ function Welcome() {
                     <>
                     <h1>Account Info</h1>
                     <br></br>
-                    <p><strong>Balance: </strong>{balance}</p>
+                    <p><strong>Balance: </strong>C${balance}</p>
                     <p><strong>Review Score: </strong>{rating}</p>
                     <p><strong>Maxium Hours Per Week: </strong>{maxHours}</p>
                     <p><strong>Parent Info: </strong>{parentInfo}</p>
