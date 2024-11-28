@@ -49,7 +49,7 @@
                     $stmt3->execute();
                 }
                 
-                echo json_encode(["success" => true, "message" => "Login successful.", "name" => $name]);
+                echo json_encode(["success" => true, "message" => "Login successful.", "name" => $name, "mem_id" => $memberID]);
             } else {
                 echo json_encode(["success" => false, "message" => "Invalid password."]);
             }

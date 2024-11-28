@@ -29,6 +29,7 @@ function Login() {
     
             if (result.success) {
                 localStorage.setItem('name', result.name);
+                localStorage.setItem('mem_id', result.mem_id);
                 navigate('/welcome');
             } else {
                 alert(`Error: ${result.message}`);
