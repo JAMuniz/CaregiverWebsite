@@ -42,7 +42,7 @@
                 "balance" => $balance,
                 "review_score" => $review_score,
                 "mid" => $mid,
-                "username" => $name,
+                "name" => $name,
                 "address" => $address,
                 "phone_number" => $phoneNum,
                 "max_service_hours_per_week" => $maxHours,
