@@ -3,6 +3,7 @@ import '../css/welcome.css';
 import Navbar from '../Components/Navbar';
 import Account from '../Components/Account';
 import Contracts from '../Components/Contracts';
+import Search from '../Components/Search';
 
 function Welcome() {
     const [route, setRoute] = useState('');
@@ -25,11 +26,7 @@ function Welcome() {
                 {
                 (() => {
                     if (route === "search") {  //search route
-                    return(
-                        <>
-                            <p>search</p>
-                        </>
-                    );
+                        return <Search />;
                     } else if (route === "account") {  //account route
                         return <Account memberID={memberID} />;
                     } if (route === "contracts") {  //contracts route

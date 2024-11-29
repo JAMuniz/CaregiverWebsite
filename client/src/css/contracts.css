@@ -65,3 +65,18 @@
     }
   }
   
+  .terminate-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .terminate-button:hover {
+    background-color: #ff1a1a;
+  }

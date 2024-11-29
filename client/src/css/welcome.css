@@ -53,6 +53,7 @@
     font-size: 2rem;
     margin-bottom: 20px;
     margin-top: auto;
+    border-bottom: 2px solid #007bff;
   }
   
   .Main-content p {
