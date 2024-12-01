@@ -27,3 +27,4 @@ VALUES
 
 UPDATE Members SET email = "alicejohnson@gmail.com" WHERE member_id = 1;
 UPDATE Members SET email = "bobsmith@gmail.com" WHERE member_id = 2;
+ALTER TABLE CaregiverAccount ADD COLUMN review_count INT DEFAULT 0;
