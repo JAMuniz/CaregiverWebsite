@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../css/contracts.css';
+import '../css/review.css';
 
 
 function Contracts({ memberID }) {
@@ -129,7 +130,6 @@ function Contracts({ memberID }) {
                                     <option key={score} value={score}>{score}</option>
                                 ))}
                             </select>
-                            {/* <input type="number" min="0" max="5" required onChange={(e) => setReviewScore(e.target.value)} /> */}
                         </label>
                         <label>
                             Review Message (Optional):
