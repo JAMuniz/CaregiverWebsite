@@ -4,6 +4,7 @@ import Navbar from '../Components/Navbar';
 import Account from '../Components/Account';
 import Contracts from '../Components/Contracts';
 import Search from '../Components/Search';
+import Reviews from '../Components/Reviews';
 
 function Welcome() {
     const [route, setRoute] = useState('');
@@ -18,7 +19,8 @@ function Welcome() {
                 <ul>
                     <li><a href="#search" onClick = {() => setRoute("search")}>Search for Service</a></li>
                     <li><a href="#account" onClick = {() => setRoute("account")}>Account</a></li>
-                    <li><a href="#account" onClick = {() => setRoute("contracts")}>My Contracts</a></li>
+                    <li><a href="#contracts" onClick = {() => setRoute("contracts")}>My Contracts</a></li>
+                    <li><a href="#reviews" onClick = {() => setRoute("reviews")}>My Reviews</a></li>
                 </ul>
             </aside>
 
@@ -31,6 +33,8 @@ function Welcome() {
                         return <Account memberID={memberID} />;
                     } if (route === "contracts") {  //contracts route
                         return <Contracts memberID={memberID} />;
+                    } if (route === "reviews") {  //reviews route
+                        return <Reviews memberID={memberID} />;
                     } else {  //default route (only appears when you open the dashboard at first)
                     return(
                         <>

@@ -10,6 +10,7 @@ function Contracts({ memberID }) {
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [reviewScore, setReviewScore] = useState('');
     const [reviewMessage, setReviewMessage] = useState('');
+    const [reviewingContractId, setReviewingContractId] = useState(null);
 
     useEffect(() => {
         fetchContracts();
@@ -59,6 +60,7 @@ function Contracts({ memberID }) {
             if (result.success) {
                 alert('Contract terminated successfully!');
                 setReviewingCaregiver(caregiver_id);
+                setReviewingContractId(contract_id);
                 setShowReviewForm(true);
                 fetchContracts();
             } else {
@@ -75,6 +77,7 @@ function Contracts({ memberID }) {
             caregiver_id: reviewingCaregiver,
             review_score: reviewScore,
             review_message: reviewMessage,
+            contract_id: reviewingContractId,
         };
     
         try {
@@ -115,6 +118,7 @@ function Contracts({ memberID }) {
                                     <p><strong>End Date:</strong> {contract.end_date}</p>
                                     <p><strong>Daily Hours:</strong> {contract.daily_hours}</p>
                                     <p><strong>Rate per Hour:</strong> {contract.rate_per_hour}</p>
+                                    <p><strong>Status:</strong> {contract.status}</p>
                                     <button className="terminate-button" onClick={() => terminateContract(contract.contract_id, contract.caregiver_id)}>Terminate Contract</button>
                                 </div>
                             ))

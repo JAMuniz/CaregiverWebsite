@@ -26,7 +26,7 @@
 
     $contract_id = $data['contract_id'];
 
-    $stmt = $conn->prepare("DELETE FROM Contracts WHERE contract_id = ?");
+    $stmt = $conn->prepare("UPDATE Contracts SET status = 'terminated' WHERE contract_id = ?");
     $stmt->bind_param("i", $contract_id);
 
     if ($stmt->execute()) {

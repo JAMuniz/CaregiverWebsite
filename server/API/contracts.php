@@ -34,7 +34,7 @@
     JOIN 
         Members m ON c.caregiver_id = m.member_id
     WHERE 
-        c.member_id = ?");
+        c.member_id = ? AND c.status = 'active'");
     $stmt->bind_param("i", $memberID);
     $stmt->execute();
     $stmt->store_result();
@@ -56,11 +56,11 @@
 
     // caregiver contracts
     $caregiverContracts = [];
-    $stmt = $conn->prepare("SELECT * FROM Contracts WHERE caregiver_id = ?");
+    $stmt = $conn->prepare("SELECT * FROM Contracts WHERE caregiver_id = ? AND status = 'active'");
     $stmt->bind_param("i", $memberID);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($contract_id, $member_id, $caregiver_id, $start_date, $end_date, $daily_hours, $rate_per_hour);
+    $stmt->bind_result($contract_id, $member_id, $caregiver_id, $start_date, $end_date, $daily_hours, $rate_per_hour, $status);
 
     while ($stmt->fetch()) {
         $caregiverContracts[] = [
@@ -71,6 +71,7 @@
             "end_date" => $end_date,
             "daily_hours" => $daily_hours,
             "rate_per_hour" => $rate_per_hour,
+            "status" => $status,
         ];
     }
     $stmt->close();

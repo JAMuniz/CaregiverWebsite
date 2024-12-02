@@ -25,6 +25,18 @@
         exit;
     }
 
+    if (!isset($data['review_score'])) {
+        echo json_encode(["success" => false, "message" => "Review score is required."]);
+        exit;
+    }
+
+    if (!isset($data['contract_id'])) {
+        echo json_encode(["success" => false, "message" => "Contract ID is required."]);
+        exit;
+    }
+
+    $review_message = isset($data['review_message']) ? $data['review_message'] : null;
+
     $stmt = $conn->prepare("SELECT review_score, review_count FROM CaregiverAccount WHERE member_id = ?");
     $stmt->bind_param("i", $data['caregiver_id']);
     $stmt->execute();
@@ -40,15 +52,23 @@
     $new_review_count = $review_count + 1;
     $new_average_score = (($current_score * $review_count) + (float)$data['review_score']) / $new_review_count;
 
+    // update CaregiverAccount
     $update_stmt = $conn->prepare("UPDATE CaregiverAccount SET review_score = ?, review_count = ? WHERE member_id = ?");
     $update_stmt->bind_param("dii", $new_average_score, $new_review_count, $data['caregiver_id']);
+    $update_success = $update_stmt->execute();
+    $update_stmt->close();
 
-    if ($update_stmt->execute()) {        
+    // populate the review into the Ratings table
+    $insert_stmt = $conn->prepare("INSERT INTO Ratings (contract_id, score, review_text, member_id) VALUES (?, ?, ?, ?)");
+    $insert_stmt->bind_param("iisi", $data['contract_id'], $data['review_score'], $review_message, $data['caregiver_id']);
+    $insert_success = $insert_stmt->execute();
+    $insert_stmt->close();
+
+    if ($update_success && $insert_success) {        
         echo json_encode(["success" => true, "message" => "Review submitted successfully!", "new_score" => $new_average_score]);
     } else {
         echo json_encode(["success" => false, "message" => "Failed to submit review."]);
     }
 
-    $update_stmt->close();
     $conn->close();
 ?>
