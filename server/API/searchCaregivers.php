@@ -17,23 +17,48 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $query = "SELECT m.member_id, m.name, m.phone_number, m.max_service_hours_per_week, ca.review_score 
-        FROM 
-            CaregiverAccount ca
-        JOIN 
-            Members m ON ca.member_id = m.member_id;
-    ";
+    // $query = "SELECT m.member_id, m.name, m.phone_number, m.max_service_hours_per_week, ca.review_score 
+    //     FROM 
+    //         CaregiverAccount ca
+    //     JOIN 
+    //         Members m ON ca.member_id = m.member_id;
+    // ";
 
-    $result = $conn->query($query);
+    // $result = $conn->query($query);
 
-    if ($result) {
+    // if ($result) {
+    //     $caregivers = [];
+    //     while ($row = $result->fetch_assoc()) {
+    //         $caregivers[] = $row;
+    //     }
+    //     echo json_encode(["success" => true, "caregivers" => $caregivers]);
+    // } else {
+    //     echo json_encode(["success" => false, "message" => "Error fetching caregivers: " . $conn->error]);
+    // }
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    if (isset($data['member_id'])) {
+        $logged_in_member_id = $data['member_id'];
+
+        $stmt = $conn->prepare("
+            SELECT m.member_id, m.name, m.phone_number, m.max_service_hours_per_week, ca.review_score 
+            FROM CaregiverAccount ca
+            JOIN Members m ON ca.member_id = m.member_id
+            WHERE m.member_id != ?
+        ");
+        $stmt->bind_param("i", $logged_in_member_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
         $caregivers = [];
         while ($row = $result->fetch_assoc()) {
             $caregivers[] = $row;
         }
+        $stmt->close();
+
         echo json_encode(["success" => true, "caregivers" => $caregivers]);
     } else {
-        echo json_encode(["success" => false, "message" => "Error fetching caregivers: " . $conn->error]);
+        echo json_encode(["success" => false, "message" => "Member ID is required."]);
     }
 
     $conn->close();
