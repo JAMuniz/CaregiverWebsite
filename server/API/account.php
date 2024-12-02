@@ -22,7 +22,7 @@
     if (isset($data['member_id'])) {
         $member_id = $data['member_id'];
         
-        $stmt = $conn->prepare("SELECT balance, review_score FROM CaregiverAccount WHERE member_id = ?");
+        $stmt = $conn->prepare("SELECT review_score FROM CaregiverAccount WHERE member_id = ?");
         $stmt->bind_param("i", $member_id);
         $stmt->execute();
         $stmt->store_result();
@@ -33,9 +33,9 @@
         $stmt2->store_result();
 
         if ($stmt->num_rows > 0 && $stmt2->num_rows > 0) {
-            $stmt->bind_result($balance, $review_score);
+            $stmt->bind_result($review_score);
             $stmt->fetch();
-            $stmt2->bind_result($mid, $name, $pass, $address, $phoneNum, $maxHours, $balance2, $parentInfo, $email);
+            $stmt2->bind_result($mid, $name, $pass, $address, $phoneNum, $maxHours, $balance, $parentInfo, $email);
             $stmt2->fetch();
 
             echo json_encode(["success" => true, "message" => "Account info found.",

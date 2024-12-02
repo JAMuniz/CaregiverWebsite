@@ -112,7 +112,7 @@ function Contracts({ memberID }) {
                             <p><strong>End Date:</strong> {contract.end_date}</p>
                             <p><strong>Daily Hours:</strong> {contract.daily_hours}</p>
                             <p><strong>Rate per Hour:</strong> {contract.rate_per_hour}</p>
-                            <button className="terminate-button" onClick={() => terminateContract(contract.contract_id)}>Terminate Contract</button>
+                            <button className="terminate-button" onClick={() => terminateContract(contract.contract_id, contract.caregiver_id)}>Terminate Contract</button>
                         </div>
                     ))
                 ) : (

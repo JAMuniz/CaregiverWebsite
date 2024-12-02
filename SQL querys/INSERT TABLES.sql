@@ -5,10 +5,10 @@ VALUES
 ('Alice Johnson', 'hashed_password_1', '123 Main St, Cityville', '123-456-7890', 20, 2000.00, 'Lives with dementia, requires assistance with daily activities'),
 ('Bob Smith', 'hashed_password_2', '456 Oak Ave, Townsville', '987-654-3210', 15, 2000.00, 'Has limited mobility, needs assistance with walking and cooking');
 
-INSERT INTO CaregiverAccount (member_id, balance, review_score)
+INSERT INTO CaregiverAccount (member_id, review_score, review_count)
 VALUES 
-(1, 3000.00, 4.5),
-(2, 1500.00, 4.0);
+(1, 4.5, 1),
+(2, 4.0, 1);
 
 INSERT INTO Contracts (member_id, caregiver_id, start_date, end_date, daily_hours, rate_per_hour) 
 VALUES 
@@ -28,3 +28,4 @@ VALUES
 UPDATE Members SET email = "alicejohnson@gmail.com" WHERE member_id = 1;
 UPDATE Members SET email = "bobsmith@gmail.com" WHERE member_id = 2;
 ALTER TABLE CaregiverAccount ADD COLUMN review_count INT DEFAULT 0;
+ALTER TABLE CaregiverAccount DROP COLUMN balance; -- no need to have balance in CaregiverAccount also, as already have in Members

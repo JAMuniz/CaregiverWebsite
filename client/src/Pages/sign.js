@@ -38,10 +38,10 @@ function Sign() {
             const result = await response.json();
     
             if (result.success) {
-                alert("Registration successful!");
+                alert(result.messages.join('\n'));
                 navigate('/login');
             } else {
-                alert(`Error: ${result.message}`);
+                alert(result.messages.join('\n'));
             }
         } catch (error) {
             console.error("Error:", error);
