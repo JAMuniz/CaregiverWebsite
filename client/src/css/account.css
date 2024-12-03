@@ -26,24 +26,6 @@
     font-weight: bold;
   }
   
-  .update-button,
-  .save-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background: green;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .update-button:hover,
-  .save-button:hover {
-    background: #1b9142;
-  }
-  
   .edit-form input,
   .edit-form select {
     display: block;
@@ -60,5 +42,36 @@
     font-weight: bold;
     margin-bottom: 5px;
     color: #333;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .save-button {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .cancel-button {
+    background-color: #dc3545; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .save-button:hover,
+  .cancel-button:hover {
+    opacity: 0.9;
   }
   

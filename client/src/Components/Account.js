@@ -1,4 +1,5 @@
-import React, { useState, /*useEffect, */useContext } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useContext } from 'react';
 import UserContext from '../Components/UserContext';
 import '../css/account.css';
 
@@ -13,7 +14,6 @@ function Account({ memberID }) {
   const [parentInfo, setPinfo] = useState('');
   const [email, setEmail] = useState('');
   const [careStatus, setCareStatus] = useState('');
-  const [newCareStatus, setNewCareStatus] = useState('');
   const { name, updateName } = useContext(UserContext);
   const [dailyHours, setDailyHours] = useState('');
 
@@ -29,11 +29,9 @@ function Account({ memberID }) {
         }
   };
 
-  /*
   useEffect(() => {
     fetchAccountData();
-  });
-  */
+  }, []);
 
   const fetchAccountData = async () => {
     const formData = { member_id: memberID };
@@ -56,8 +54,7 @@ function Account({ memberID }) {
             setEmail(result.email);
             updateName(result.name);
             setDailyHours(result.daily_hours);
-            setCareStatus(result.careStatus || "");
-            console.log("Care Status State:", result.careStatus);
+            setCareStatus(result.careStatus);
       } else {
             alert(`Error: ${result.message}`);
       }
@@ -66,7 +63,6 @@ function Account({ memberID }) {
         alert("An error occurred while fetching account data.");
     }
   };
-  fetchAccountData();
 
   const handleSave = async () => {
     const formData = {
@@ -78,7 +74,7 @@ function Account({ memberID }) {
         daily_hours: dailyHours,
         parent_info: parentInfo,
         email: email,
-        careStatus: newCareStatus,
+        careStatus: careStatus
     };
 
     try {
@@ -104,9 +100,6 @@ function Account({ memberID }) {
 
   return (
     <div>
-      <button className="Update-button" onClick={() => setIsEditing(!isEditing)}>
-        {isEditing ? "Cancel" : "Update Info"}
-      </button>
       {isEditing ? (
         <div className="account-container">
           <h1>Edit Account Info</h1>
@@ -119,16 +112,23 @@ function Account({ memberID }) {
           <label className="edit-form input">Email:<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
           <label className="edit-form input">
             Caregiver Status:
-            <select value={newCareStatus} onChange={(e) => setNewCareStatus(e.target.value)}>
+            <select value={careStatus} onChange={(e) => setCareStatus(e.target.value)}>
                 <option value="">Select</option>
                 <option value="active">Active</option>
                 <option value="terminated">Terminate</option>
             </select>
           </label>
-          <button className="save-button" onClick={handleSave}>Save Changes</button>
+          <div className="button-container">
+            <button className="save-button" onClick={handleSave}>Save Changes</button>
+            <button className="cancel-button" onClick={() => {
+                fetchAccountData(); 
+                setIsEditing(false);
+              }}>Cancel</button>
+          </div>
         </div>
       ) : (
         <div>
+          <button className="Update-button" onClick={() => setIsEditing(!isEditing)}>Update Info</button>
           <h1>Account Info</h1>
             <p><strong>Balance: </strong>C${balance}</p>
             <p><strong>Review Score: </strong>{rating}</p>
