@@ -22,7 +22,7 @@
     if (isset($data['member_id'])) {
         $member_id = $data['member_id'];
         
-        $stmt = $conn->prepare("SELECT review_score FROM CaregiverAccount WHERE member_id = ?");
+        $stmt = $conn->prepare("SELECT review_score, careStatus FROM CaregiverAccount WHERE member_id = ?");
         $stmt->bind_param("i", $member_id);
         $stmt->execute();
         $stmt->store_result();
@@ -33,7 +33,7 @@
         $stmt2->store_result();
 
         if ($stmt->num_rows > 0 && $stmt2->num_rows > 0) {
-            $stmt->bind_result($review_score);
+            $stmt->bind_result($review_score, $careStatus);
             $stmt->fetch();
             $stmt2->bind_result($mid, $name, $pass, $address, $phoneNum, $maxHours, $balance, $parentInfo, $email);
             $stmt2->fetch();
@@ -48,7 +48,8 @@
                 "max_service_hours_per_week" => $maxHours,
                 "parent_info" => $parentInfo,
                 "email" => $email,
-                "password" => $pass
+                "password" => $pass,
+                "careStatus" => $careStatus
             ]);
         } else {
             echo json_encode(["success" => false, "message" => "Could not retrieve account info."]);

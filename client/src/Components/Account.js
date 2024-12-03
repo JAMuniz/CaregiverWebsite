@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import UserContext from '../Components/UserContext';
+import '../css/account.css';
+
 
 function Account({ memberID }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -10,6 +12,8 @@ function Account({ memberID }) {
   const [maxHours, setmaxHours] = useState('');
   const [parentInfo, setPinfo] = useState('');
   const [email, setEmail] = useState('');
+  const [careStatus, setCareStatus] = useState('');
+  const [newCareStatus, setNewCareStatus] = useState('');
   const { name, updateName } = useContext(UserContext);
 
   const formatPhoneNumber = (value) => {
@@ -48,6 +52,8 @@ function Account({ memberID }) {
             setPinfo(result.parent_info);
             setEmail(result.email);
             updateName(result.name);
+            setCareStatus(result.careStatus || "");
+            console.log("Care Status State:", result.careStatus);
       } else {
             alert(`Error: ${result.message}`);
       }
@@ -66,6 +72,7 @@ function Account({ memberID }) {
         max_service_hours_per_week: maxHours,
         parent_info: parentInfo,
         email: email,
+        careStatus: newCareStatus,
     };
 
     try {
@@ -95,33 +102,23 @@ function Account({ memberID }) {
         {isEditing ? "Cancel" : "Update Info"}
       </button>
       {isEditing ? (
-        <div>
+        <div className="account-container">
           <h1>Edit Account Info</h1>
-          <label>
-            Name:
-            <input type="text" value={name} onChange={(e) => updateName(e.target.value)} />
+          <label className="edit-form label">Name:<input type="text" value={name} onChange={(e) => updateName(e.target.value)} /></label>
+          <label className="edit-form label">Address:<input type="text" value={address} onChange={(e) => setAddress(e.target.value)} /></label>
+          <label className="edit-form label">Phone Number:<input type="text" value={phone_number} onChange={(e) => setPhone(formatPhoneNumber(e.target.value))} /></label>
+          <label className="edit-form label">Max Hours Per Week:<input type="number" value={maxHours} onChange={(e) => setmaxHours(e.target.value)} /></label>
+          <label className="edit-form label">Parent Info:<input type="text" value={parentInfo} onChange={(e) => setPinfo(e.target.value)} /></label>
+          <label className="edit-form input">Email:<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
+          <label className="edit-form input">
+            Caregiver Status:
+            <select value={newCareStatus} onChange={(e) => setNewCareStatus(e.target.value)}>
+                <option value="">Select</option>
+                <option value="active">Active</option>
+                <option value="terminated">Terminate</option>
+            </select>
           </label>
-          <label>
-            Address:
-            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
-          </label>
-          <label>
-            Phone Number:
-            <input type="text" value={phone_number} onChange={(e) => setPhone(formatPhoneNumber(e.target.value))} />
-          </label>
-          <label>
-            Max Hours Per Week:
-            <input type="number" value={maxHours} onChange={(e) => setmaxHours(e.target.value)} />
-          </label>
-          <label>
-            Parent Info:
-            <input type="text" value={parentInfo} onChange={(e) => setPinfo(e.target.value)} />
-          </label>
-          <label>
-            Email:
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <button className="Save-button" onClick={handleSave}>Save Changes</button>
+          <button className="save-button" onClick={handleSave}>Save Changes</button>
         </div>
       ) : (
         <div>
@@ -129,13 +126,14 @@ function Account({ memberID }) {
             <p><strong>Balance: </strong>C${balance}</p>
             <p><strong>Review Score: </strong>{rating}</p>
             <p><strong>Max Hours Per Week: </strong>{maxHours}</p>
-            <p><strong>Parent Info: </strong>{parentInfo}</p>
+            <p><strong>Caregiver Status: </strong>{careStatus}</p>
             <br />
           <h1>Profile Info</h1>
             <p><strong>Name: </strong>{name}</p>
             <p><strong>Email: </strong>{email}</p>
             <p><strong>Address: </strong>{address}</p>
             <p><strong>Phone Number: </strong>{formatPhoneNumber(phone_number)}</p>
+            <p><strong>Parent Info: </strong>{parentInfo}</p>
             <br />
         </div>
       )}

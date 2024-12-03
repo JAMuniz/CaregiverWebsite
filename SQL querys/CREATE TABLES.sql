@@ -64,3 +64,6 @@ ADD email VARCHAR(255) NOT NULL;
 
 -- Add a status column to the contract to preserve for review
 ALTER TABLE Contracts ADD status ENUM('active', 'terminated', 'pending') DEFAULT 'active';
+
+-- Add a Caregiver Status column so the user can chose to offer Care of to stay off services.
+ALTER TABLE CaregiverAccount ADD careStatus ENUM('active', 'terminated') DEFAULT 'active';

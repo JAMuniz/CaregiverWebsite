@@ -66,7 +66,6 @@ function Search(){
             const result = await response.json();
 
             if (result.success) {
-                // alert('Caregiver hired successfully!');
                 alert('The Caregiver was sent this requirement!');
             } else {
                 alert(`Error: ${result.message}`);

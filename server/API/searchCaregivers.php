@@ -17,24 +17,6 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // $query = "SELECT m.member_id, m.name, m.phone_number, m.max_service_hours_per_week, ca.review_score 
-    //     FROM 
-    //         CaregiverAccount ca
-    //     JOIN 
-    //         Members m ON ca.member_id = m.member_id;
-    // ";
-
-    // $result = $conn->query($query);
-
-    // if ($result) {
-    //     $caregivers = [];
-    //     while ($row = $result->fetch_assoc()) {
-    //         $caregivers[] = $row;
-    //     }
-    //     echo json_encode(["success" => true, "caregivers" => $caregivers]);
-    // } else {
-    //     echo json_encode(["success" => false, "message" => "Error fetching caregivers: " . $conn->error]);
-    // }
     $data = json_decode(file_get_contents("php://input"), true);
 
     if (isset($data['member_id'])) {
@@ -44,7 +26,7 @@
             SELECT m.member_id, m.name, m.phone_number, m.max_service_hours_per_week, ca.review_score 
             FROM CaregiverAccount ca
             JOIN Members m ON ca.member_id = m.member_id
-            WHERE m.member_id != ?
+            WHERE m.member_id != ? AND ca.careStatus = 'active'
         ");
         $stmt->bind_param("i", $logged_in_member_id);
         $stmt->execute();
