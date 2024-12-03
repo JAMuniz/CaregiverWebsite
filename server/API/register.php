@@ -27,11 +27,13 @@
         isset($data['phone_number']) &&
         isset($data['parent_info']) &&
         isset($data['max_service_hours_per_week']) &&
-        isset($data['email'])
+        isset($data['email']) &&
+        isset($data['dailyHours']) 
+        
     ) {
         // insert into Member account
-        $stmt = $conn->prepare("INSERT INTO Members (name, password, address, phone_number, parent_info, max_service_hours_per_week, care_money_balance, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssdss", $name, $password, $address, $phone_number, $parent_info, $max_service_hours_per_week, $care_money_balance, $email);
+        $stmt = $conn->prepare("INSERT INTO Members (name, password, address, phone_number, parent_info, max_service_hours_per_week, care_money_balance, email, remaining_hours, daily_hours) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssdssii", $name, $password, $address, $phone_number, $parent_info, $max_service_hours_per_week, $care_money_balance, $email, $remaining_hours, $daily_hours);
 
         $name = $data['name'];
         $password = password_hash($data['password'], PASSWORD_BCRYPT); 
@@ -41,6 +43,8 @@
         $care_money_balance = 2000.00; 
         $max_service_hours_per_week = (int)$data['max_service_hours_per_week'];
         $email = $data['email'];
+        $remaining_hours = $data['maxHours'];
+        $daily_hours = $data['dailyHours'];
 
         if ($stmt->execute()) {
             $response["messages"][] = "Member registered successfully.";

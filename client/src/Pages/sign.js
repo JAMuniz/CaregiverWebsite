@@ -8,6 +8,7 @@ function Sign() {
     const [phone, setPhone] = useState('');
     const [pInfo, setPinfo] = useState('');
     const [maxHours, setmaxHours] = useState('');
+    const [dailyHours, setDailyHours] = useState('');
     const [address, setAdd] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,6 +26,9 @@ function Sign() {
             parent_info: pInfo,
             email: email,
             max_service_hours_per_week: maxHours,
+            dailyHours: dailyHours,
+            maxHours: maxHours, //remaining_hours
+
         };
         try {
             const response = await fetch("http://localhost:5000/API/register.php", {
@@ -106,13 +110,24 @@ function Sign() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="maxHours">Maximum Hour Per Week:</label>
+                    <label htmlFor="maxHours">Maximum Hour(s) Per Week:</label>
                     <input
                         type="number"
                         id="maxHours"
                         value={maxHours}
                         onChange={(e) => setmaxHours(e.target.value)}
                         placeholder="Enter how many hours per week"
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="dailyHours">Daily Hour(s) of service:</label>
+                    <input
+                        type="number"
+                        id="dailyHours"
+                        value={dailyHours}
+                        onChange={(e) => setDailyHours(e.target.value)}
+                        placeholder="Enter how many hours per day"
                         required
                     />
                 </div>
