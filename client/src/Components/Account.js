@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, /*useEffect, */useContext } from 'react';
 import UserContext from '../Components/UserContext';
 import '../css/account.css';
 
@@ -29,9 +29,11 @@ function Account({ memberID }) {
         }
   };
 
+  /*
   useEffect(() => {
     fetchAccountData();
   });
+  */
 
   const fetchAccountData = async () => {
     const formData = { member_id: memberID };
@@ -64,6 +66,7 @@ function Account({ memberID }) {
         alert("An error occurred while fetching account data.");
     }
   };
+  fetchAccountData();
 
   const handleSave = async () => {
     const formData = {
