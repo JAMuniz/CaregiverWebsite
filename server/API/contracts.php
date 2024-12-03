@@ -56,7 +56,7 @@
 
     // caregiver contracts
     $caregiverContracts = [];
-    $stmt = $conn->prepare("SELECT * FROM Contracts WHERE caregiver_id = ? AND status = 'active'");
+    $stmt = $conn->prepare("SELECT * FROM Contracts WHERE caregiver_id = ? AND status IN ('active', 'pending')");
     $stmt->bind_param("i", $memberID);
     $stmt->execute();
     $stmt->store_result();

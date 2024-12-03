@@ -63,4 +63,4 @@ ALTER TABLE Members
 ADD email VARCHAR(255) NOT NULL;
 
 -- Add a status column to the contract to preserve for review
-ALTER TABLE Contracts ADD status ENUM('active', 'terminated') DEFAULT 'active';
+ALTER TABLE Contracts ADD status ENUM('active', 'terminated', 'pending') DEFAULT 'active';

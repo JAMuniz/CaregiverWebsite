@@ -59,9 +59,11 @@ function Contracts({ memberID }) {
 
             if (result.success) {
                 alert('Contract terminated successfully!');
-                setReviewingCaregiver(caregiver_id);
                 setReviewingContractId(contract_id);
-                setShowReviewForm(true);
+                if(caregiver_id !== null){
+                    setReviewingCaregiver(caregiver_id);
+                    setShowReviewForm(true);
+                }                
                 fetchContracts();
             } else {
                 alert(`Error: ${result.message}`);
@@ -71,6 +73,35 @@ function Contracts({ memberID }) {
             alert('An error occurred while terminating the contract.');
         }
     };
+
+    const acceptContract = async (contract_id) => {
+        if (!window.confirm('Are you sure you want to accept this contract?')) {
+            return;
+        }
+    
+        const formData = { contract_id };
+    
+        try {
+            const response = await fetch('http://localhost:5000/API/acceptContract.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+    
+            const result = await response.json();
+    
+            if (result.success) {
+                alert('Contract accepted successfully!');
+                fetchContracts();
+            } else {
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while accepting the contract.');
+        }
+    };
+    
 
     const submitReview = async () => {
         const formData = {
@@ -137,7 +168,12 @@ function Contracts({ memberID }) {
                                     <p><strong>End Date:</strong> {contract.end_date}</p>
                                     <p><strong>Daily Hours:</strong> {contract.daily_hours}</p>
                                     <p><strong>Rate per Hour:</strong> {contract.rate_per_hour}</p>
-                                    <button className="terminate-button" onClick={() => terminateContract(contract.contract_id)}>Terminate Contract</button>
+                                    <p><strong>Status:</strong> {contract.status}</p>
+                                    {contract.status === 'pending' ? (
+                                        <button className="accept-button" onClick={() => acceptContract(contract.contract_id)}>Accept</button>
+                                    ) : (
+                                        <button className="terminate-button" onClick={() => terminateContract(contract.contract_id, null)}>Terminate Contract</button>
+                                    )}
                                 </div>
                             ))
                         ) : (

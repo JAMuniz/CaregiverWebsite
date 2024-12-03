@@ -53,6 +53,7 @@ function Search(){
             end_date: endDate,
             daily_hours: 8, 
             rate_per_hour: 30.00,
+            status: 'pending',
         };
     
         try {
@@ -65,7 +66,8 @@ function Search(){
             const result = await response.json();
 
             if (result.success) {
-                alert('Caregiver hired successfully!');
+                // alert('Caregiver hired successfully!');
+                alert('The Caregiver was sent this requirement!');
             } else {
                 alert(`Error: ${result.message}`);
             }

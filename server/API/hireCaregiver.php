@@ -25,17 +25,19 @@
         isset($data['start_date']) &&
         isset($data['end_date']) &&
         isset($data['daily_hours']) &&
-        isset($data['rate_per_hour'])
+        isset($data['rate_per_hour']) &&
+        isset($data['status'])
     ) {
-        $stmt = $conn->prepare("INSERT INTO Contracts (member_id, caregiver_id, start_date, end_date, daily_hours, rate_per_hour) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO Contracts (member_id, caregiver_id, start_date, end_date, daily_hours, rate_per_hour, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param(
-            "iissis",
+            "iissids",
             $data['member_id'],
             $data['caregiver_id'],
             $data['start_date'],
             $data['end_date'],
             $data['daily_hours'],
-            $data['rate_per_hour']
+            $data['rate_per_hour'],
+            $data['status']
         );
 
         if ($stmt->execute()) {
