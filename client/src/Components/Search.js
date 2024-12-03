@@ -93,7 +93,8 @@ function Search(){
                     <div key={caregiver.member_id} className="caregiver-card">
                         <p><strong>Name:</strong> {caregiver.name}</p>
                         <p><strong>Phone:</strong> {caregiver.phone_number}</p>
-                        <p><strong>Max Hours per Week:</strong> {caregiver.max_service_hours_per_week}</p>
+                        <p><strong>Remaining Hours per Week:</strong> {caregiver.remaining_hours}</p>
+                        <p><strong>Daily Hours:</strong> {caregiver.daily_hours}</p>
                         <p><strong>Review Score:</strong> {caregiver.review_score}</p>
                         <button className="hire-button" onClick={() => handleHire(caregiver.member_id)}>Hire</button>
                     </div>

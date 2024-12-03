@@ -35,7 +35,7 @@
         if ($stmt->num_rows > 0 && $stmt2->num_rows > 0) {
             $stmt->bind_result($review_score, $careStatus);
             $stmt->fetch();
-            $stmt2->bind_result($mid, $name, $pass, $address, $phoneNum, $maxHours, $balance, $parentInfo, $email);
+            $stmt2->bind_result($mid, $name, $pass, $address, $phoneNum, $maxHours, $balance, $parentInfo, $email, $remainingHrs, $dailyHours);
             $stmt2->fetch();
 
             echo json_encode(["success" => true, "message" => "Account info found.",
@@ -48,6 +48,8 @@
                 "max_service_hours_per_week" => $maxHours,
                 "parent_info" => $parentInfo,
                 "email" => $email,
+                "remainingHrs" => $remainingHrs,
+                "daily_hours" => $dailyHours,
                 "password" => $pass,
                 "careStatus" => $careStatus
             ]);

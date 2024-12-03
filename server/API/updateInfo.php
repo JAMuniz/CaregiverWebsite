@@ -27,7 +27,8 @@
         !isset($data['parent_info']) ||
         !isset($data['email']) ||
         !isset($data['max_service_hours_per_week']) ||
-        !isset($data['careStatus'])
+        !isset($data['careStatus']) ||
+        !isset($data['daily_hours'])
     ) {
         echo json_encode(["success" => false, "message" => "Invalid input. Missing required fields."]);
         exit;
@@ -41,13 +42,14 @@
     $email = $data['email'];
     $maxHours = (int)$data['max_service_hours_per_week'];
     $careStatus = $data['careStatus'];
+    $dailyHours = (int)$data['daily_hours'];
 
     $sql = "UPDATE `Members` 
-            SET `name` = ?, `address` = ?, `phone_number` = ?, `parent_info` = ?, `email` = ?, `max_service_hours_per_week` = ? 
+            SET `name` = ?, `address` = ?, `phone_number` = ?, `parent_info` = ?, `email` = ?, `max_service_hours_per_week` = ?, `daily_hours` = ? 
             WHERE `member_id` = ?";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssi", $name, $address, $phoneNum, $parentInfo, $email, $maxHours, $memberID);
+    $stmt->bind_param("sssssiii", $name, $address, $phoneNum, $parentInfo, $email, $maxHours, $dailyHours, $memberID);
 
     $sql2 = "UPDATE `CaregiverAccount` 
             SET `careStatus` = ? 

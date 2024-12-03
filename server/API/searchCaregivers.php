@@ -23,7 +23,7 @@
         $logged_in_member_id = $data['member_id'];
 
         $stmt = $conn->prepare("
-            SELECT m.member_id, m.name, m.phone_number, m.max_service_hours_per_week, ca.review_score 
+            SELECT m.member_id, m.name, m.phone_number, m.remaining_hours, m.daily_hours, ca.review_score 
             FROM CaregiverAccount ca
             JOIN Members m ON ca.member_id = m.member_id
             WHERE m.member_id != ? AND ca.careStatus = 'active'

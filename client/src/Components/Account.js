@@ -15,6 +15,7 @@ function Account({ memberID }) {
   const [careStatus, setCareStatus] = useState('');
   const [newCareStatus, setNewCareStatus] = useState('');
   const { name, updateName } = useContext(UserContext);
+  const [dailyHours, setDailyHours] = useState('');
 
   const formatPhoneNumber = (value) => {
         const numericValue = value.replace(/\D/g, '');
@@ -30,7 +31,7 @@ function Account({ memberID }) {
 
   useEffect(() => {
     fetchAccountData();
-  },);
+  });
 
   const fetchAccountData = async () => {
     const formData = { member_id: memberID };
@@ -52,6 +53,7 @@ function Account({ memberID }) {
             setPinfo(result.parent_info);
             setEmail(result.email);
             updateName(result.name);
+            setDailyHours(result.daily_hours);
             setCareStatus(result.careStatus || "");
             console.log("Care Status State:", result.careStatus);
       } else {
@@ -70,6 +72,7 @@ function Account({ memberID }) {
         address: address,
         phone_number: phone_number,
         max_service_hours_per_week: maxHours,
+        daily_hours: dailyHours,
         parent_info: parentInfo,
         email: email,
         careStatus: newCareStatus,
@@ -108,6 +111,7 @@ function Account({ memberID }) {
           <label className="edit-form label">Address:<input type="text" value={address} onChange={(e) => setAddress(e.target.value)} /></label>
           <label className="edit-form label">Phone Number:<input type="text" value={phone_number} onChange={(e) => setPhone(formatPhoneNumber(e.target.value))} /></label>
           <label className="edit-form label">Max Hours Per Week:<input type="number" value={maxHours} onChange={(e) => setmaxHours(e.target.value)} /></label>
+          <label className="edit-form label">Daily Hours:<input type="number" value={dailyHours} onChange={(e) => setDailyHours(e.target.value)} /></label>
           <label className="edit-form label">Parent Info:<input type="text" value={parentInfo} onChange={(e) => setPinfo(e.target.value)} /></label>
           <label className="edit-form input">Email:<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
           <label className="edit-form input">
@@ -126,6 +130,7 @@ function Account({ memberID }) {
             <p><strong>Balance: </strong>C${balance}</p>
             <p><strong>Review Score: </strong>{rating}</p>
             <p><strong>Max Hours Per Week: </strong>{maxHours}</p>
+            <p><strong>Daily Hours: </strong>{dailyHours}</p>
             <p><strong>Caregiver Status: </strong>{careStatus}</p>
             <br />
           <h1>Profile Info</h1>

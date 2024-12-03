@@ -29,3 +29,6 @@ UPDATE Members SET email = "alicejohnson@gmail.com" WHERE member_id = 1;
 UPDATE Members SET email = "bobsmith@gmail.com" WHERE member_id = 2;
 ALTER TABLE CaregiverAccount ADD COLUMN review_count INT DEFAULT 0;
 ALTER TABLE CaregiverAccount DROP COLUMN balance; -- no need to have balance in CaregiverAccount also, as already have in Members
+
+ALTER TABLE Members ADD COLUMN remaining_hours INT; -- used to track remaining hours per week
+ALTER TABLE Members ADD COLUMN daily_hours INT; -- used to track daily hours (for changing)
